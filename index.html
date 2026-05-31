@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="InvoiceLab - 免费在线专业发票生成器。创建、管理和导出精美PDF发票，支持多币种、多模板，数据本地存储保护隐私。">
+  <meta name="keywords" content="发票生成器,invoice generator,PDF发票,在线发票,免费发票工具">
+  <meta name="author" content="InvoiceLab">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="InvoiceLab - 专业发票生成器">
+  <meta property="og:description" content="免费在线专业发票生成器。创建精美PDF发票，支持多币种和多模板。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tyr1105.github.io/invoicelab/">
+  <meta property="og:locale" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="InvoiceLab - 专业发票生成器">
+  <meta name="twitter:description" content="免费在线专业发票生成器，数据安全存储在本地。">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "InvoiceLab",
+    "description": "免费在线专业发票生成器",
+    "url": "https://tyr1105.github.io/invoicelab/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "inLanguage": "zh-CN"
+  }
+  </script>
+
+  <title>InvoiceLab - 专业发票生成器 | 免费在线创建PDF发票</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 升级横幅 -->
+  <div id="pro-banner">
+    <span class="banner-text">🚀 升级到 <strong>Pro 版本</strong>，解锁 10+ 模板、自定义品牌、循环发票和多语言支持</span>
+    <a href="#gumroad" class="btn-upgrade">了解更多</a>
+    <button class="banner-close" aria-label="关闭">✕</button>
+  </div>
+
+  <!-- 头部导航 -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="app-logo">
+        <div class="logo-icon">📋</div>
+        <span>InvoiceLab</span>
+      </div>
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="create">📝 创建发票</button>
+        <button class="nav-tab" data-tab="templates">🎨 模板</button>
+        <button class="nav-tab" data-tab="clients">👥 客户</button>
+        <button class="nav-tab" data-tab="history">📊 历史</button>
+        <button class="nav-tab" data-tab="settings">⚙️ 设置</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Hero区域 -->
+    <section class="hero" id="hero-section">
+      <h1>InvoiceLab - 专业发票生成器</h1>
+      <p>免费、安全、无需注册。在浏览器中创建精美发票，一键导出PDF。所有数据存储在本地，保护您的隐私。</p>
+      <div class="hero-benefits">
+        <div class="hero-benefit"><div class="benefit-icon">🔒</div> 数据本地存储</div>
+        <div class="hero-benefit"><div class="benefit-icon">📄</div> 专业PDF导出</div>
+        <div class="hero-benefit"><div class="benefit-icon">🌍</div> 多币种支持</div>
+        <div class="hero-benefit"><div class="benefit-icon">🎨</div> 多种模板</div>
+        <div class="hero-benefit"><div class="benefit-icon">⚡</div> 完全免费</div>
+      </div>
+    </section>
+
+    <!-- ==================== Tab 1: 创建发票 ==================== -->
+    <section class="tab-content active" id="tab-create">
+      <div class="invoice-layout">
+        <!-- 左侧表单 -->
+        <div class="invoice-form">
+          <!-- 发件人信息 -->
+          <div class="card">
+            <h3 class="section-title"><span class="icon">🏢</span> 发件人信息</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>公司名称</label>
+                <input type="text" id="sender-company" placeholder="您的公司名称">
+              </div>
+              <div class="form-group">
+                <label>邮箱</label>
+                <input type="email" id="sender-email" placeholder="email@company.com">
+              </div>
+              <div class="form-group full-width">
+                <label>地址</label>
+                <input type="text" id="sender-address" placeholder="公司地址">
+              </div>
+              <div class="form-group">
+                <label>电话</label>
+                <input type="tel" id="sender-phone" placeholder="+86 138 0000 0000">
+              </div>
+              <div class="form-group">
+                <label>公司Logo</label>
+                <div class="logo-upload-area">
+                  <div id="logo-preview"></div>
+                  <label class="btn-upload" for="logo-upload">📤 上传Logo</label>
+                  <input type="file" id="logo-upload" accept="image/*" style="display:none">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 收件人信息 -->
+          <div class="card">
+            <h3 class="section-title">
+              <span class="icon">👤</span> 收件人信息
+              <button class="quick-select-btn" id="client-quick-select">📌 快速选择客户</button>
+            </h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>客户姓名</label>
+                <input type="text" id="client-name" placeholder="客户姓名">
+              </div>
+              <div class="form-group">
+                <label>公司</label>
+                <input type="text" id="client-company" placeholder="客户公司">
+              </div>
+              <div class="form-group full-width">
+                <label>地址</label>
+                <input type="text" id="client-address" placeholder="客户地址">
+              </div>
+              <div class="form-group">
+                <label>邮箱</label>
+                <input type="email" id="client-email" placeholder="client@email.com">
+              </div>
+            </div>
+          </div>
+
+          <!-- 发票详情 -->
+          <div class="card">
+            <h3 class="section-title"><span class="icon">📋</span> 发票详情</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>发票编号</label>
+                <input type="text" id="invoice-number">
+              </div>
+              <div class="form-group">
+                <label>币种</label>
+                <select id="currency">
+                  <option value="CNY">¥ CNY - 人民币</option>
+                  <option value="USD">$ USD - 美元</option>
+                  <option value="EUR">€ EUR - 欧元</option>
+                  <option value="HKD">HK$ HKD - 港币</option>
+                  <option value="GBP">£ GBP - 英镑</option>
+                  <option value="JPY">¥ JPY - 日元</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>发票日期</label>
+                <input type="date" id="invoice-date">
+              </div>
+              <div class="form-group">
+                <label>到期日期</label>
+                <input type="date" id="invoice-due-date">
+              </div>
+            </div>
+          </div>
+
+          <!-- 行项目 -->
+          <div class="card">
+            <h3 class="section-title"><span class="icon">📦</span> 项目明细</h3>
+            <table class="line-items-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>描述</th>
+                  <th>数量</th>
+                  <th>单价</th>
+                  <th>金额</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="line-items-body"></tbody>
+            </table>
+            <button class="btn btn-secondary btn-sm" id="btn-add-line">+ 添加项目</button>
+
+            <!-- 合计 -->
+            <div class="totals-bar">
+              <div class="total-row">
+                <span>小计</span>
+                <span id="subtotal-display">¥0.00</span>
+              </div>
+              <div class="total-row">
+                <span>税率 (%)</span>
+                <input type="number" id="tax-rate" value="0" min="0" max="100" step="0.1" style="width:80px;background:var(--bg);border:1px solid var(--surface2);border-radius:4px;color:var(--text);padding:4px 8px;font-size:13px;">
+              </div>
+              <div class="total-row">
+                <span>税额</span>
+                <span id="tax-amount-display">¥0.00</span>
+              </div>
+              <div class="total-row">
+                <span>折扣</span>
+                <input type="number" id="discount" value="0" min="0" step="0.01" style="width:100px;background:var(--bg);border:1px solid var(--surface2);border-radius:4px;color:var(--text);padding:4px 8px;font-size:13px;">
+              </div>
+              <div class="total-row grand">
+                <span>合计</span>
+                <span id="total-display">¥0.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 备注 -->
+          <div class="card">
+            <h3 class="section-title"><span class="icon">📝</span> 备注</h3>
+            <div class="form-group">
+              <textarea id="invoice-notes" rows="4" placeholder="付款条款、银行信息、感谢语等..."></textarea>
+            </div>
+          </div>
+
+          <!-- 操作按钮 -->
+          <div class="action-bar">
+            <button class="btn btn-primary" id="btn-save-invoice">💾 保存发票</button>
+            <button class="btn btn-secondary" id="btn-save-draft">📄 保存草稿</button>
+            <button class="btn btn-secondary" id="btn-export-pdf">📥 导出PDF</button>
+            <button class="btn btn-secondary" id="btn-print">🖨️ 打印</button>
+          </div>
+        </div>
+
+        <!-- 右侧预览 -->
+        <div class="invoice-preview-panel">
+          <div class="preview-label">实时预览</div>
+          <div id="invoice-preview"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== Tab 2: 模板 ==================== -->
+    <section class="tab-content" id="tab-templates">
+      <h2 style="margin-bottom:20px;font-size:22px;">🎨 选择发票模板</h2>
+      <p style="color:var(--text2);margin-bottom:24px;">选择一个适合您品牌风格的模板。模板会应用到发票预览和PDF导出中。</p>
+      <div class="templates-grid" id="templates-grid"></div>
+    </section>
+
+    <!-- ==================== Tab 3: 客户 ==================== -->
+    <section class="tab-content" id="tab-clients">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="font-size:22px;">👥 客户管理</h2>
+        <button class="btn btn-primary" onclick="Clients.showForm()">+ 添加客户</button>
+      </div>
+      <div id="clients-list" class="clients-grid"></div>
+      <div id="clients-empty" class="empty-state" style="display:none;">
+        <div class="empty-icon">👥</div>
+        <p>暂无保存的客户</p>
+        <button class="btn btn-primary" onclick="Clients.showForm()">添加第一个客户</button>
+      </div>
+    </section>
+
+    <!-- ==================== Tab 4: 历史 ==================== -->
+    <section class="tab-content" id="tab-history">
+      <h2 style="font-size:22px;margin-bottom:20px;">📊 发票历史</h2>
+      <div class="history-filters">
+        <button class="history-filter-btn active" data-filter="all" onclick="History.filter('all')">全部</button>
+        <button class="history-filter-btn" data-filter="draft" onclick="History.filter('draft')">草稿</button>
+        <button class="history-filter-btn" data-filter="sent" onclick="History.filter('sent')">已发送</button>
+        <button class="history-filter-btn" data-filter="paid" onclick="History.filter('paid')">已支付</button>
+      </div>
+      <div id="history-list"></div>
+      <div id="history-empty" class="empty-state" style="display:none;">
+        <div class="empty-icon">📭</div>
+        <p>暂无发票记录。创建您的第一张发票吧！</p>
+      </div>
+    </section>
+
+    <!-- ==================== Tab 5: 设置 ==================== -->
+    <section class="tab-content" id="tab-settings">
+      <h2 style="font-size:22px;margin-bottom:20px;">⚙️ 设置</h2>
+      <div class="settings-grid">
+        <div class="settings-section">
+          <h3>🏢 默认发件人信息</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>公司名称</label>
+              <input type="text" id="settings-company" placeholder="公司名称">
+            </div>
+            <div class="form-group">
+              <label>邮箱</label>
+              <input type="email" id="settings-email" placeholder="邮箱">
+            </div>
+            <div class="form-group full-width">
+              <label>地址</label>
+              <input type="text" id="settings-address" placeholder="地址">
+            </div>
+            <div class="form-group">
+              <label>电话</label>
+              <input type="tel" id="settings-phone" placeholder="电话">
+            </div>
+            <div class="form-group">
+              <label>公司Logo</label>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div id="settings-logo-preview"></div>
+                <label class="btn-upload" for="settings-logo-upload">📤 上传</label>
+                <input type="file" id="settings-logo-upload" accept="image/*" style="display:none" onchange="Settings.handleLogo(event)">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>💰 默认发票设置</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>默认币种</label>
+              <select id="settings-currency">
+                <option value="CNY">¥ CNY - 人民币</option>
+                <option value="USD">$ USD - 美元</option>
+                <option value="EUR">€ EUR - 欧元</option>
+                <option value="HKD">HK$ HKD - 港币</option>
+                <option value="GBP">£ GBP - 英镑</option>
+                <option value="JPY">¥ JPY - 日元</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>默认税率 (%)</label>
+              <input type="number" id="settings-tax-rate" value="0" min="0" max="100" step="0.1">
+            </div>
+            <div class="form-group full-width">
+              <label>默认付款条款</label>
+              <textarea id="settings-payment-terms" rows="2" placeholder="请于发票日期后30天内付款。"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>🔢 发票编号格式</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>编号前缀</label>
+              <input type="text" id="settings-prefix" value="INV-">
+            </div>
+            <div class="form-group">
+              <label>起始编号</label>
+              <input type="number" id="settings-start" value="1000" min="1">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>💾 数据管理</h3>
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px;">导出或导入所有发票数据，或清除所有数据。</p>
+          <div class="settings-actions">
+            <button class="btn btn-secondary" onclick="Settings.exportData()">📤 导出数据</button>
+            <label class="btn btn-secondary" style="cursor:pointer;">
+              📥 导入数据
+              <input type="file" accept=".json" style="display:none" onchange="Settings.importData(event)">
+            </label>
+            <button class="btn btn-danger" onclick="Settings.clearAllData()">🗑️ 清除所有数据</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;">
+        <button class="btn btn-primary" onclick="Settings.save()">💾 保存设置</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-links">
+      <a href="#">关于我们</a>
+      <a href="#">使用条款</a>
+      <a href="#">隐私政策</a>
+      <a href="#gumroad">升级Pro</a>
+    </div>
+    <p>&copy; 2026 InvoiceLab. 保留所有权利。所有数据存储在本地浏览器中。</p>
+  </footer>
+
+  <!-- Toast容器 -->
+  <div id="toast-container"></div>
+
+  <!-- ==================== 模态框 ==================== -->
+  <!-- 客户表单 -->
+  <div class="modal-overlay" id="client-form-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">✕</button>
+      <h3 id="client-form-title">添加客户</h3>
+      <input type="hidden" id="client-form-id">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>客户姓名 *</label>
+          <input type="text" id="client-form-name" placeholder="客户姓名">
+        </div>
+        <div class="form-group">
+          <label>公司</label>
+          <input type="text" id="client-form-company" placeholder="公司名称">
+        </div>
+        <div class="form-group full-width">
+          <label>地址</label>
+          <input type="text" id="client-form-address" placeholder="地址">
+        </div>
+        <div class="form-group">
+          <label>邮箱</label>
+          <input type="email" id="client-form-email" placeholder="邮箱">
+        </div>
+        <div class="form-group">
+          <label>电话</label>
+          <input type="tel" id="client-form-phone" placeholder="电话">
+        </div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:8px;">
+        <button class="btn btn-primary" onclick="Clients.save()">💾 保存</button>
+        <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').classList.remove('show')">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 客户快速选择 -->
+  <div class="modal-overlay" id="client-picker-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">✕</button>
+      <h3>📌 选择客户</h3>
+      <div id="client-picker-list"></div>
+    </div>
+  </div>
+
+  <!-- 发票查看 -->
+  <div class="modal-overlay" id="invoice-view-modal">
+    <div class="modal" style="max-width:700px;">
+      <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">✕</button>
+      <div id="invoice-view-content"></div>
+      <div style="margin-top:16px;display:flex;gap:8px;">
+        <button class="btn btn-primary" id="view-export-pdf" onclick="PDFExport.exportPDF()">📥 导出PDF</button>
+        <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').classList.remove('show')">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 状态更改 -->
+  <div class="modal-overlay" id="status-modal">
+    <div class="modal" style="max-width:400px;">
+      <button class="modal-close" onclick="this.closest('.modal-overlay').classList.remove('show')">✕</button>
+      <h3>更改发票状态</h3>
+      <input type="hidden" id="status-invoice-id">
+      <div class="status-options">
+        <button class="status-option" data-status="draft" onclick="History.setStatus('draft')">📝 草稿</button>
+        <button class="status-option" data-status="sent" onclick="History.setStatus('sent')">📨 已发送</button>
+        <button class="status-option" data-status="paid" onclick="History.setStatus('paid')">✅ 已支付</button>
+      </div>
+      <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').classList.remove('show')">取消</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/clients.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/pdf.js"></script>
+  <script src="js/invoice.js"></script>
+  <script>
+    // 初始化应用
+    document.addEventListener('DOMContentLoaded', () => {
+      App.init();
+      Invoice.init();
+    });
+  </script>
+</body>
+</html>
